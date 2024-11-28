@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>เข้าสู่ระบบ</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="login-container">
+        <h2>เข้าสู่ระบบ</h2>
+        <form id="loginForm">
+            <input type="text" id="username" placeholder="ชื่อผู้ใช้งาน" required>
+            <input type="password" id="password" placeholder="รหัสผ่าน" required>
+            <div class="button-container">
+                <button type="button" onclick="login()">เข้าสู่ระบบ</button>
+                <button type="button" onclick="signUp()">ลงชื่อเข้าใช้</button>
+            </div>
+        </form>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
