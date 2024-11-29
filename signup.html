@@ -11,20 +11,21 @@
             justify-content: center; /* Centers the button */
         }
     </style>
+    <script src="signup.js" defer></script>
 </head>
 <body>
     <div class="login-container">
         <h2>ลงชื่อเข้าใช้</h2>
-        <form id="loginForm">
-            <input type="text" id="username" placeholder="ชื่อผู้ใช้งาน" required>
-            <input type="password" id="password" placeholder="รหัสผ่าน" required>
-            <input type="password" id="confirm" placeholder="ยืนยันรหัสผ่าน" required>
+        <form id="signupForm">
+            <input type="text" id="username" name="username" placeholder="ชื่อผู้ใช้งาน" required>
+            <input type="email" id="email" name="email" placeholder="อีเมล" required>
+            <input type="password" id="password" name="password" placeholder="รหัสผ่าน" required>
+            <!-- <input type="password" id="confirm" placeholder="ยืนยันรหัสผ่าน" required> -->
             <div class="button-container">
-                <button type="button" onclick="signUp()">ลงชื่อเข้าใช้</button>
+                <!-- <button type="button" onclick="signUp()">ลงชื่อเข้าใช้</button> -->
+                <button type="button" id="signupButton">ลงชื่อเข้าใช้</button>
             </div>
         </form>
     </div>
-
-    <script src="signup.js"></script>
 </body>
 </html>
