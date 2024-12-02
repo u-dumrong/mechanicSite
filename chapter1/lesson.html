@@ -4,10 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>lesson</title>
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        body {
+          display: flex;
+          flex-direction: column; /* แนวตั้ง */
+          justify-content: flex-start;  /* ด้านบน */
+          align-items: center;      /* กลาง แนวนอน */
+          height: 100vh;            /* ความสูงเต็มหน้าจอ */
+          margin: 0;                /* ลบ margin ของ body */
+        }
+        
+        embed {
+        width: 70%;      /* ปรับขนาดให้เต็มความกว้างของหน้าต่าง */
+        height: 100%;     /* ปรับขนาดให้เต็มความสูงของหน้าต่าง */
+        border: none;     /* ลบเส้นขอบ */
+        }
+      </style>
 </head>
 <body>
-    <a href="chapter1.html">บทที่ 1</a>
+    <button onclick="window.location.href='chapter1.html'">บทที่ 1</button>
     <h1>lesson.html</h1>
-    <p>ขออภัยในความไม่สะดวก หน้านี้ยังไม่มีเนื้อหาใดๆ</p>
+    <!-- <p>ขออภัยในความไม่สะดวก หน้านี้ยังไม่มีเนื้อหาใดๆ</p> -->
+    <embed src="บทที่ 1 ความรู้เบื้องต้นเกี่ยวกับ งานเครื่องมือกล.pdf" type="application/pdf">
 </body>
 </html>

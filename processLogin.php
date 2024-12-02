@@ -1,0 +1,71 @@
+<?php
+/*
+// เรียกใช้การเชื่อมต่อฐานข้อมูล
+include 'dbConfig.php';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $username = $conn->real_escape_string($_POST['username']);
+    $password = $_POST['password'];
+
+    // ดึงข้อมูลผู้ใช้จากฐานข้อมูล
+    $sql = "SELECT * FROM signup WHERE username = '$username'";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        // รับข้อมูลผู้ใช้จากฐานข้อมูล
+        $user = $result->fetch_assoc();
+
+        // ตรวจสอบรหัสผ่าน
+        if (password_verify($password, $user['password'])) {
+            echo "ล็อกอินสำเร็จ!";
+        } else {
+            echo "รหัสผ่านไม่ถูกต้อง!";
+        }
+    } else {
+        echo "ไม่พบชื่อผู้ใช้นี้ในระบบ!";
+    }
+}
+
+// ปิดการเชื่อมต่อ
+$conn->close();
+*/
+?>
+
+<?php
+//session_start();
+
+include 'dbConfig.php'; // เรียกการเชื่อมต่อฐานข้อมูล
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $identifier = $conn->real_escape_string($_POST['identifier']); // รับค่าชื่อผู้ใช้หรืออีเมล
+    $password = $_POST['password'];
+
+    // ตรวจสอบทั้งชื่อผู้ใช้และอีเมล
+    $sql = "SELECT * FROM signup WHERE username = '$identifier' OR email = '$identifier'";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        // รับข้อมูลผู้ใช้จากฐานข้อมูล
+        $user = $result->fetch_assoc();
+
+        // ตรวจสอบรหัสผ่าน
+        if (password_verify($password, $user['password'])) {
+            // ตั้งค่าข้อมูลใน session
+            /*
+            $_SESSION['user_id'] = $user['id'];
+            $_SESSION['username'] = $user['username'];
+            $_SESSION['email'] = $user['email'];
+            */
+
+            echo "ล็อกอินสำเร็จ!";
+        } else {
+            echo "รหัสผ่านไม่ถูกต้อง!";
+        }
+    } else {
+        echo "ไม่พบชื่อผู้ใช้หรืออีเมลนี้ในระบบ!";
+    }
+}
+
+// ปิดการเชื่อมต่อ
+$conn->close();
+?>

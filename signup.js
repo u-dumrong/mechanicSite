@@ -17,17 +17,18 @@ function signUp() {
     }
 }
 */
-
+// ผู้ใช้คลิกปุ่ม signupButton แล้ว JavaScript สร้างข้อมูลฟอร์ม (FormData) จากฟอร์ม signupForm
 document.getElementById('signupButton').addEventListener('click', function () {
     const formData = new FormData(document.getElementById('signupForm'));
 
+    // ใช้ Fetch API ส่งข้อมูลนี้ไปยังไฟล์ PHP (processSignup.php) ด้วยเมธอด POST
     fetch('processSignup.php', {
         method: 'POST',
         body: formData
     })
-        .then(response => response.text())
+        .then(response => response.text()) // ไฟล์ PHP ประมวลผลข้อมูลแล้วส่งข้อความตอบกลับ (Response) กลับมา
         .then(data => {
-            alert(data); // แสดงผลลัพธ์ที่ได้จาก PHP
+            alert(data); // แสดงข้อความตอบกลับด้วย alert() หรือพิมพ์ข้อผิดพลาดในคอนโซลหากเกิดปัญหา
         })
         .catch(error => {
             console.error('Error:', error);

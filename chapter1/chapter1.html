@@ -4,11 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>บทที่ 1</title>
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        body {
+          display: flex;
+          flex-direction: column; /* แนวตั้ง */
+          justify-content: flex-start;  /* ด้านบน */
+          align-items: center;      /* กลาง แนวนอน */
+          height: 100vh;            /* ความสูงเต็มหน้าจอ */
+          margin: 0;                /* ลบ margin ของ body */
+        }
+      </style>
 </head>
 <body>
-    <a href="../main.html">กลับไปหน้าหลัก</a>
+    <button onclick="window.location.href='../main.html'">กลับไปหน้าหลัก</button>
     <h1>บทที่ 1</h1>
-    <a href="lesson.html">บทเรียน</a> <br>
-    <a href="test.html">แบบทดสอบ</a>
+    <button onclick="window.location.href='lesson.html'">บทเรียน</button>
+    <button onclick="window.location.href='test.html'">แบบทดสอบ</button>
 </body>
 </html>

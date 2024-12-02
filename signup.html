@@ -11,11 +11,13 @@
             justify-content: center; /* Centers the button */
         }
     </style>
-    <script src="signup.js" defer></script>
+    <script src="signup.js" defer></script> <!-- ใช้ defer เพื่อให้ไฟล์ JavaScript รันหลังจาก DOM ถูกโหลดเสร็จ โดยไม่บล็อกการโหลด HTML -->
 </head>
 <body>
     <div class="login-container">
         <h2>ลงชื่อเข้าใช้</h2>
+
+        <!-- แบบฟอร์มรับข้อมูล -->
         <form id="signupForm">
             <input type="text" id="username" name="username" placeholder="ชื่อผู้ใช้งาน" required>
             <input type="email" id="email" name="email" placeholder="อีเมล" required>

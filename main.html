@@ -4,15 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>หน้าหลัก</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+          display: flex;
+          flex-direction: column; /* แนวตั้ง */
+          justify-content: flex-start;  /* ด้านบน */
+          align-items: center;      /* กลาง แนวนอน */
+          height: 100vh;            /* ความสูงเต็มหน้าจอ */
+          margin: 0;                /* ลบ margin ของ body */
+        }
+      </style>
 </head>
 <body>
     <h1>ยินดีต้อนรับสู่หน้าหลัก</h1>
     <p>คลิกที่ลิงก์ด้านล่างเพื่อไปยังหน้าต่าง ๆ</p>
-    <a href="chapter1/chapter1.html">บทที่ 1</a><br>
-    <a href="chapter2/chapter2.html">บทที่ 2</a><br>
-    <a href="chapter3/chapter3.html">บทที่ 3</a>
+    <button onclick="window.location.href='chapter1/chapter1.html'">บทที่ 1</button>
+    <button onclick="window.location.href='chapter2/chapter2.html'">บทที่ 2</button>
+    <button onclick="window.location.href='chapter3/chapter3.html'">บทที่ 3</button>
+    <button onclick="window.location.href='index.html'">ล็อกเอาท์</button>
 </body>
-<footer>
-    <a href="index.html">ล็อกเอาท์</a>
-  </footer>
+<!--
+    <footer>
+        <button onclick="window.location.href='index.html'">ล็อกเอาท์</button>
+    </footer>
+-->
 </html>
