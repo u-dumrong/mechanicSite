@@ -6,23 +6,25 @@
     <title>หน้าหลัก</title>
     <link rel="stylesheet" href="styles.css">
     <style>
-        body {
+        .login-container {
           display: flex;
           flex-direction: column; /* แนวตั้ง */
-          justify-content: flex-start;  /* ด้านบน */
-          align-items: center;      /* กลาง แนวนอน */
-          height: 100vh;            /* ความสูงเต็มหน้าจอ */
-          margin: 0;                /* ลบ margin ของ body */
         }
-      </style>
+        button {
+            width: 50%;
+        }
+    </style>
 </head>
 <body>
-    <h1>ยินดีต้อนรับสู่หน้าหลัก</h1>
-    <p>คลิกที่ลิงก์ด้านล่างเพื่อไปยังหน้าต่าง ๆ</p>
-    <button onclick="window.location.href='chapter1/chapter1.html'">บทที่ 1</button>
-    <button onclick="window.location.href='chapter2/chapter2.html'">บทที่ 2</button>
-    <button onclick="window.location.href='chapter3/chapter3.html'">บทที่ 3</button>
-    <button onclick="window.location.href='index.html'">ล็อกเอาท์</button>
+    <div class="login-container">
+        <h1>ยินดีต้อนรับสู่หน้าหลัก</h1>
+        <p>คลิกที่ลิงก์ด้านล่างเพื่อไปยังหน้าต่าง ๆ</p>
+        <button onclick="window.location.href='chapter1/chapter1.html'">บทที่ 1</button>
+        <button onclick="window.location.href='chapter2/chapter2.html'">บทที่ 2</button>
+        <button onclick="window.location.href='chapter3/chapter3.html'">บทที่ 3</button>
+        <button onclick="window.location.href='profile.php'">โปรไฟล์</button>
+        <button onclick="window.location.href='logout.php'">ลงชื่อออก</button>
+    </div>
 </body>
 <!--
     <footer>

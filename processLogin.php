@@ -32,7 +32,7 @@ $conn->close();
 ?>
 
 <?php
-//session_start();
+session_start();
 
 include 'dbConfig.php'; // เรียกการเชื่อมต่อฐานข้อมูล
 
@@ -50,12 +50,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // ตรวจสอบรหัสผ่าน
         if (password_verify($password, $user['password'])) {
+
             // ตั้งค่าข้อมูลใน session
-            /*
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['username'] = $user['username'];
             $_SESSION['email'] = $user['email'];
-            */
 
             echo "ล็อกอินสำเร็จ!";
         } else {

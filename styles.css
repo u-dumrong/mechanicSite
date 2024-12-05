@@ -5,7 +5,10 @@ body {
     height: 100vh;
     margin: 0;
     font-family: Noto Sans Thai;
-    background-color: #f0f2f5;
+    /* background-color: #f0f2f5; */
+    background: linear-gradient(135deg, #f3f4f6, #a2c7e5);
+    /* background-size: cover; */
+    background-attachment: fixed;
 }
 .login-container {
     width: 300px;
@@ -31,13 +34,16 @@ input[type="text"], input[type="email"], input[type="password"] {
 }
 button {
     padding: 10px;
-    width: 45%;
+    width:25%;
+    margin: 10px auto;
     background-color: #007bff;
     border: none;
     color: white;
     cursor: pointer;
     border-radius: 4px;
+    transition: 0.3s;
 }
 button:hover {
     background-color: #0056b3;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }

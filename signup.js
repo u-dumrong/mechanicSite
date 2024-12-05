@@ -29,6 +29,7 @@ document.getElementById('signupButton').addEventListener('click', function () {
         .then(response => response.text()) // ไฟล์ PHP ประมวลผลข้อมูลแล้วส่งข้อความตอบกลับ (Response) กลับมา
         .then(data => {
             alert(data); // แสดงข้อความตอบกลับด้วย alert() หรือพิมพ์ข้อผิดพลาดในคอนโซลหากเกิดปัญหา
+            window.location.href = "index.html";
         })
         .catch(error => {
             console.error('Error:', error);
