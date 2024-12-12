@@ -47,3 +47,25 @@ button:hover {
     background-color: #0056b3;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
+
+/* ปุ่มสีแดง */
+button.red-button {
+    background-color: #dc3545; /* สีแดง */
+}
+button.red-button:hover {
+    background-color: #a71d2a; /* สีแดงเข้ม */
+}
+
+.timerDisplay {
+    position: fixed; /* ทำให้เลื่อนตาม */
+    top: 10px;       /* ระยะจากด้านบน */
+    right: 10px;     /* ระยะจากด้านขวา */
+    background-color: #f9f9f9; /* สีพื้นหลัง */
+    color: #000;     /* สีข้อความ */
+    padding: 10px;   /* ระยะห่างในกล่อง */
+    border: 2px solid #000; /* กรอบ */
+    border-radius: 5px; /* มุมโค้ง */
+    font-size: 1.2em; /* ขนาดตัวอักษร */
+    font-weight: bold; /* ตัวอักษรหนา */
+    z-index: 1000; /* แสดงเหนือส่วนอื่น */
+}

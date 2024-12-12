@@ -26,12 +26,22 @@ document.getElementById('signupButton').addEventListener('click', function () {
         method: 'POST',
         body: formData
     })
-        .then(response => response.text()) // ไฟล์ PHP ประมวลผลข้อมูลแล้วส่งข้อความตอบกลับ (Response) กลับมา
+    .then(response => {
+        if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.text();
+    })
         .then(data => {
             alert(data); // แสดงข้อความตอบกลับด้วย alert() หรือพิมพ์ข้อผิดพลาดในคอนโซลหากเกิดปัญหา
-            window.location.href = "index.html";
+            if (data.trim().includes("ลงทะเบียนสำเร็จ!")) {
+                window.location.href = "index.html";
+            } else {
+                alert("การลงทะเบียนล้มเหลว: " + data);
+            }
         })
         .catch(error => {
             console.error('Error:', error);
+            alert("เกิดข้อผิดพลาดในการเชื่อมต่อ!");
         });
 });

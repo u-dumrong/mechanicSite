@@ -26,19 +26,30 @@ document.getElementById('loginButton').addEventListener('click', function () {
         method: 'POST',
         body: formData
     })
-        .then(response => response.text()) // รับข้อความตอบกลับจาก PHP
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json(); // แปลงเป็น JSON
+        })
         .then(data => {
             console.log("Server response:", data); // ตรวจสอบว่าข้อมูลที่ได้รับจาก PHP คืออะไร
-            alert(data); // แสดงข้อความตอบกลับ
-            if (data.trim() === "ล็อกอินสำเร็จ!") {
-                console.log("Login success, redirecting...");
-                window.location.href = "main.html"; // เปลี่ยนหน้าเมื่อสำเร็จ
+            //alert(data); // แสดงข้อความตอบกลับ
+
+            if (data.status === 'success') {
+                alert("ล็อกอินสำเร็จ!");
+                if (data.role === 'teacher') {
+                    window.location.href = "teacherMain.html"; // เปลี่ยนไปหน้าหลักของครู
+                } else if (data.role === 'student') {
+                    window.location.href = "main.html"; // เปลี่ยนไปหน้าหลักของนักเรียน
+                }
             } else {
-                console.log("Login failed or incorrect response: ", data);
+                alert(data.message); // แสดงข้อความผิดพลาดจาก PHP
             }
         })
         .catch(error => {
             console.error('Error:', error);
+            alert("เกิดข้อผิดพลาดในการเชื่อมต่อกับเซิร์ฟเวอร์!");
         });
 });
 

@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = $_POST['password'];
 
     // ตรวจสอบทั้งชื่อผู้ใช้และอีเมล
-    $sql = "SELECT * FROM signup WHERE username = '$identifier' OR email = '$identifier'";
+    $sql = "SELECT * FROM users WHERE username = '$identifier' OR email = '$identifier'";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
@@ -55,14 +55,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['username'] = $user['username'];
             $_SESSION['email'] = $user['email'];
+            $_SESSION['role'] = $user['role']; // เพิ่ม role ใน session
 
-            echo "ล็อกอินสำเร็จ!";
+            // ส่งข้อมูล role กลับไปยัง JavaScript
+            echo json_encode(['status' => 'success', 'role' => $user['role']]);
         } else {
-            echo "รหัสผ่านไม่ถูกต้อง!";
+            echo json_encode(['status' => 'error', 'message' => 'รหัสผ่านไม่ถูกต้อง!']);
         }
     } else {
-        echo "ไม่พบชื่อผู้ใช้หรืออีเมลนี้ในระบบ!";
+        echo json_encode(['status' => 'error', 'message' => 'ไม่พบชื่อผู้ใช้หรืออีเมลนี้ในระบบ!']);
     }
+} else {
+    echo json_encode(['status' => 'error', 'message' => 'Invalid request method.']);
 }
 
 // ปิดการเชื่อมต่อ

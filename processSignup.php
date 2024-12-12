@@ -14,33 +14,42 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $conn->real_escape_string($_POST['username']);
     $email = $conn->real_escape_string($_POST['email']);
     $password = password_hash($_POST['password'], PASSWORD_BCRYPT); // เข้ารหัสรหัสผ่าน
-
+    
     // ตรวจสอบรูปแบบอีเมล (วิธีที่ 1)
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         echo "รูปแบบอีเมลไม่ถูกต้อง!";
         exit; // หยุดกระบวนการถ้าอีเมลไม่ถูกต้อง
     }
 
-    // ตรวจสอบว่ามี username หรือ email ซ้ำหรือไม่
-    $checkSql = "SELECT * FROM signup WHERE username='$username' OR email='$email'";
-    $result = $conn->query($checkSql);
+     // ตรวจสอบว่ามี username หรือ email ซ้ำหรือไม่
+     $checkSql = "SELECT * FROM users WHERE username='$username' OR email='$email'";
+     $result = $conn->query($checkSql);
+ 
+     if ($result->num_rows > 0) {
+         // ถ้ามีข้อมูลซ้ำ
+         echo "เกิดข้อผิดพลาด: ชื่อหรืออีเมลนี้ถูกใช้แล้ว!";
+     } else {
+         // ถ้าไม่มีข้อมูลซ้ำ ให้เพิ่มข้อมูลใหม่
+        $role = 'student'; // กำหนดบทบาทให้เป็น student โดยอัตโนมัติ
+         $sql = "INSERT INTO users (username, email, password, role) VALUES ('$username', '$email', '$password', '$role')";
 
-    if ($result->num_rows > 0) {
-        // ถ้ามีข้อมูลซ้ำ
-        echo "เกิดข้อผิดพลาด: ชื่อหรืออีเมลนี้ถูกใช้แล้ว!";
-    } else {
-        // ถ้าไม่มีข้อมูลซ้ำ ให้เพิ่มข้อมูลใหม่
-        $sql = "INSERT INTO signup (username, email, password) VALUES ('$username', '$email', '$password')";
-
-        // ถ้าลงชื่อเข้าใช้ไม่สำเร็จจะแจ้งข้อผิดพลาด
+        // ตรวจสอบว่าเพิ่มข้อมูลใน users สำเร็จหรือไม่
         if ($conn->query($sql) === TRUE) {
-            echo "ลงชื่อเข้าใช้สำเร็จ!";
+            $userId = $conn->insert_id; // ดึง ID ของผู้ใช้ที่เพิ่งเพิ่ม
+
+            // เพิ่มข้อมูลในตาราง students
+            $insertStudent = "INSERT INTO students (user_id) VALUES ('$userId')";
+            if ($conn->query($insertStudent) === TRUE) {
+                //header('Content-Type: text/plain; charset=utf-8'); // ตั้งค่า header ให้ตอบกลับเป็นข้อความธรรมดา
+                echo "ลงทะเบียนสำเร็จ!";
+            } else {
+                echo "เกิดข้อผิดพลาดในการเพิ่มข้อมูลนักเรียน: " . $conn->error;
+            }
         } else {
-            echo "Error: " . $sql . "<br>" . $conn->error;
+            echo "เกิดข้อผิดพลาดในการลงทะเบียน: " . $conn->error;
         }
     }
 }
-
 // ปิดการเชื่อมต่อ
 $conn->close();
 
