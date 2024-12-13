@@ -1,5 +1,5 @@
 2024-12-09
-ได้โค้ด get_timer.php, index.php, quiz.php, start_timer.php, submit.php และ ตารางฐานข้อมูล questions 
+ได้โค้ด get_timer.php, index.php, quiz.php, start_timer.php, submit.php และ ตารางฐานข้อมูล questions
 ยังใช้ไม่ได้
 
 2024-12-10
@@ -7,3 +7,8 @@
 
 2024-12-12
 ข้อสอบจับเวลาไม่ได้ แต่ครูสั่งจับเวลาแล้วให้เวลาไปแสดงบนหน้าเว็บของนักเรียนได้แล้ว
+
+ออกแบบ ui ให้เหมือนเว็บมากขึ้น เพิ่มเสียงช่วยอ่าน
+
+2024-12-13
+ได้หน้าเว็บสวยๆ แล้ว ลบ get_timer.php, index.php, quiz.php, start_timer.php, submit.php และ ตารางฐานข้อมูล questions

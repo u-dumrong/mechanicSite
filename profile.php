@@ -80,7 +80,7 @@ $conn->close();
         </div> 
         <div class="button-container">
             <button onclick="window.location.href='main.html'">กลับไปหน้าหลัก</button>
-            <button class="red-button" onclick="window.location.href='logout.php'">ลงชื่อออก</button>
+            <!-- <button class="red-button" onclick="window.location.href='logout.php'">ลงชื่อออก</button> -->
         </div>
     </div>
 </body>
