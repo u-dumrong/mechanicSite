@@ -11,4 +11,4 @@
 ออกแบบ ui ให้เหมือนเว็บมากขึ้น เพิ่มเสียงช่วยอ่าน
 
 2024-12-13
-ได้หน้าเว็บสวยๆ แล้ว ลบ get_timer.php, index.php, quiz.php, start_timer.php, submit.php และ ตารางฐานข้อมูล questions
+ได้หน้าเว็บสวยๆแล้ว ลบ get_timer.php, index.php, quiz.php, start_timer.php, submit.php และ ตารางฐานข้อมูล questions
