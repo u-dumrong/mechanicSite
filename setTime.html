@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ตั้งเวลา</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+        input, button {
+            font-size: 18px;
+            margin: 5px;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>ตั้งเวลานับถอยหลัง</h1>
+    <label for="minutes">ตั้งเวลา (นาที): </label>
+    <input type="number" id="minutes" placeholder="เช่น 5" min="1">
+    <button onclick="setTimer()">เริ่มนับถอยหลัง</button>
+
+    <script>
+        function setTimer() {
+            const minutesInput = document.getElementById('minutes');
+            const minutes = parseInt(minutesInput.value, 10);
+
+            if (isNaN(minutes) || minutes <= 0) {
+                alert('กรุณากรอกจำนวนนาทีที่ถูกต้อง');
+                return;
+            }
+
+            const endTime = Date.now() + minutes * 60000; // คำนวณเวลาสิ้นสุด
+            localStorage.setItem('endTime', endTime); // บันทึกเวลาใน Local Storage
+            alert('เวลาถูกตั้งเรียบร้อยแล้ว! กรุณาเปิดหน้าแสดงเวลา');
+        }
+    </script>
+</body>
+</html>

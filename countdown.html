@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>เวลานับถอยหลัง</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+        #countdown {
+            font-size: 48px;
+            margin: 20px 0;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <h1>เวลานับถอยหลัง</h1>
+    <div id="countdown">--:--:--</div>
+
+    <script>
+        const countdownDisplay = document.getElementById('countdown');
+
+        function formatTime(seconds) {
+            const hours = Math.floor(seconds / 3600);
+            const minutes = Math.floor((seconds % 3600) / 60);
+            const secs = seconds % 60;
+            return `${hours}:${String(minutes).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+        }
+
+        function updateCountdown() {
+            const endTime = localStorage.getItem('endTime');
+            if (!endTime) {
+                countdownDisplay.textContent = 'ยังไม่ได้ตั้งเวลา';
+                return;
+            }
+
+            const now = Date.now();
+            const timeLeft = Math.max(0, Math.floor((endTime - now) / 1000)); // เวลาเหลือในวินาที
+
+            if (timeLeft <= 0) {
+                countdownDisplay.textContent = 'หมดเวลา!';
+                clearInterval(intervalId);
+                return;
+            }
+
+            countdownDisplay.textContent = formatTime(timeLeft);
+        }
+
+        const intervalId = setInterval(updateCountdown, 1000);
+        updateCountdown();
+    </script>
+</body>
+</html>
