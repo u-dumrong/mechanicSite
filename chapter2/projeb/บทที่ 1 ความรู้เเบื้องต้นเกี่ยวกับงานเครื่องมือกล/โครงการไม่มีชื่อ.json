@@ -1,0 +1,1 @@
+{"files":[{"id":"5d5091c5-d2c8-4150-988b-eff472b4a315","name":"appsscript","type":"json","source":"{\n  \"timeZone\": \"Asia/Bangkok\",\n  \"dependencies\": {\n  },\n  \"exceptionLogging\": \"STACKDRIVER\",\n  \"runtimeVersion\": \"V8\"\n}"},{"id":"7323eecd-0a78-417a-9732-d0dc9f06bf9a","name":"รหัส","type":"server_js","source":"function myFunction() {\n  \n}\n"}]}

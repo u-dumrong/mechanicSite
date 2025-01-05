@@ -7,8 +7,8 @@
   <style>
     /* ตั้งค่าทั่วไป */
     body {
+      font-family: Noto Sans Thai;
       margin: 0;
-      font-family: Arial, sans-serif;
       display: flex;
       height: 100vh;
       overflow: hidden;
@@ -112,6 +112,33 @@
       width: calc(100% - 250px);
       box-sizing: border-box;
       transition: margin-left 0.3s ease, width 0.3s ease;
+      overflow-y: auto; /* เพิ่มเพื่อให้เลื่อนขึ้นลงได้ */
+      height: 100vh; /* ให้เนื้อหายืดเต็มหน้าจอ */
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .item {
+    width: 200px;
+    height: 300px;
+    text-align: center;
+    cursor: pointer;
+    overflow: hidden; /* ทำให้ไม่เกิดการ overflow ถ้าใช้ effect ที่ขยายรูป */
+    border-radius: 10px; /* ขอบมน */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* เงา */
+    }
+
+    .thumbnail {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    margin-bottom: 10px;
+    transition: transform 0.3s ease; /* เพิ่ม transition เพื่อให้การขยายมีความนุ่มนวล */
+    }
+
+    .thumbnail:hover {
+    transform: scale(1.1); /* ขยายรูปเป็น 1.1 เท่าเมื่อเมาส์ชี้ */
     }
 
     .sidebar.hidden ~ .content {
@@ -121,10 +148,9 @@
 
     /* Responsive: ปรับขนาดให้เหมาะสมกับหน้าจอเล็ก */
     @media (max-width: 768px) {
-      .sidebar {
-        position: absolute;
-        z-index: 1000;
-        height: 100%;
+      .content {
+          margin-left: 60px;
+          width: calc(100% - 60px);
       }
 
       .sidebar.hidden {
@@ -216,11 +242,24 @@
   </div>
 
   <!-- เนื้อหา -->
-  <div class="content" id="content">
-    <h1>ยินดีต้อนรับ</h1>
-    <p>นี่คือเนื้อหาหลักของเว็บไซต์</p>
-    <p>คุณสามารถเพิ่มเนื้อหาเพิ่มเติมที่นี่ได้ตามต้องการ</p>
-  </div>
+  <div class="content">
+    <div class="item" onclick="window.location.href='chapter1/chapter1.html'">
+        <img src="moe1.jpg" alt="Item 1" class="thumbnail">
+        <h3>บทที่ 1</h3>
+        <p>รายละเอียดของบทที่ 1</p>
+    </div>
+    <div class="item" onclick="window.location.href='chapter2/chapter2.html'">
+        <img src="moe2.jpg" alt="Item 2" class="thumbnail">
+        <h3>บทที่ 2</h3>
+        <p>รายละเอียดของบทที่ 2</p>
+    </div>
+    <div class="item" onclick="window.location.href='chapter3/chapter3.html'">
+        <img src="moe3.jpg" alt="Item 3" class="thumbnail">
+        <h3>บทที่ 3</h3>
+        <p>รายละเอียดของบทที่ 3</p>
+    </div>
+    <!-- เพิ่มรายการอื่นๆ ที่ต้องการ -->
+</div>
 
   <div class="profile-icon" id="profileIcon" onclick="toggleDropdown()">
     <!-- รูปโปรไฟล์ (สามารถแทนที่ด้วยรูปจริงได้) -->
