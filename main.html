@@ -78,6 +78,7 @@
       padding: 10px;
       border-radius: 4px;
       transition: background-color 0.3s ease;
+      overflow: hidden; /* ตัดพื้นที่ที่เกินขอบ */
     }
 
     .menu li a:hover {
@@ -149,16 +150,11 @@
     /* Responsive: ปรับขนาดให้เหมาะสมกับหน้าจอเล็ก */
     @media (max-width: 768px) {
       .content {
-          margin-left: 60px;
-          width: calc(100% - 60px);
+          margin-left: 125px;
+          width: calc(100% - 125px);
       }
-
-      .sidebar.hidden {
-        transform: translateX(-190px);
-      }
-
-      .sidebar.hidden ~ .content {
-        margin-left: 60px;
+      .sidebar {
+        width: 125px;
       }
     }
     /* สไตล์รูปโปรไฟล์ */
