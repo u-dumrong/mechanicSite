@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="th">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,12 +13,13 @@
       display: flex;
       height: 100vh;
       overflow: hidden;
+      background: linear-gradient(135deg, #f3f4f6, #a2c7e5);
     }
 
     /* แถบเมนูด้านซ้าย */
     .sidebar {
       width: 250px;
-      background-color: #2c3e50;
+      background-color:rgb(0, 89, 124);
       color: white;
       height: 100%;
       padding: 20px 10px;
@@ -32,7 +34,8 @@
     }
 
     .sidebar.hidden {
-      width: 60px; /* ย่อขนาดแถบเมนูเมื่อปิด */
+      width: 60px;
+      /* ย่อขนาดแถบเมนูเมื่อปิด */
     }
 
     /* ปุ่มสามขีด */
@@ -49,7 +52,7 @@
     }
 
     .toggle-button:hover {
-      color: #1abc9c;
+      color:rgb(79, 209, 183);
     }
 
     /* รายการเมนู */
@@ -78,11 +81,12 @@
       padding: 10px;
       border-radius: 4px;
       transition: background-color 0.3s ease;
-      overflow: hidden; /* ตัดพื้นที่ที่เกินขอบ */
+      overflow: hidden;
+      /* ตัดพื้นที่ที่เกินขอบ */
     }
 
     .menu li a:hover {
-      background-color: #34495e;
+      background-color:rgb(0, 107, 150);
     }
 
     /* ไอคอนเมนู */
@@ -113,36 +117,44 @@
       width: calc(100% - 250px);
       box-sizing: border-box;
       transition: margin-left 0.3s ease, width 0.3s ease;
-      overflow-y: auto; /* เพิ่มเพื่อให้เลื่อนขึ้นลงได้ */
-      height: 100vh; /* ให้เนื้อหายืดเต็มหน้าจอ */
+      overflow-y: auto;
+      /* เพิ่มเพื่อให้เลื่อนขึ้นลงได้ */
+      height: 100vh;
+      /* ให้เนื้อหายืดเต็มหน้าจอ */
       display: flex;
       flex-wrap: wrap;
       gap: 20px;
     }
 
     .item {
-    width: 200px;
-    height: 300px;
-    text-align: center;
-    cursor: pointer;
-    overflow: hidden; /* ทำให้ไม่เกิดการ overflow ถ้าใช้ effect ที่ขยายรูป */
-    border-radius: 10px; /* ขอบมน */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* เงา */
+      width: 200px;
+      height: 300px;
+      text-align: center;
+      cursor: pointer;
+      overflow: hidden;
+      /* ทำให้ไม่เกิดการ overflow ถ้าใช้ effect ที่ขยายรูป */
+      border-radius: 10px;
+      /* ขอบมน */
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      /* เงา */
+      background: linear-gradient(135deg,rgb(242, 244, 247),rgb(192, 211, 228));
     }
 
     .thumbnail {
-    width: 100%;
-    height: 150px;
-    object-fit: cover;
-    margin-bottom: 10px;
-    transition: transform 0.3s ease; /* เพิ่ม transition เพื่อให้การขยายมีความนุ่มนวล */
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      margin-bottom: 10px;
+      transition: transform 0.3s ease;
+      /* เพิ่ม transition เพื่อให้การขยายมีความนุ่มนวล */
     }
 
     .thumbnail:hover {
-    transform: scale(1.1); /* ขยายรูปเป็น 1.1 เท่าเมื่อเมาส์ชี้ */
+      transform: scale(1.1);
+      /* ขยายรูปเป็น 1.1 เท่าเมื่อเมาส์ชี้ */
     }
 
-    .sidebar.hidden ~ .content {
+    .sidebar.hidden~.content {
       margin-left: 60px;
       width: calc(100% - 60px);
     }
@@ -150,13 +162,15 @@
     /* Responsive: ปรับขนาดให้เหมาะสมกับหน้าจอเล็ก */
     @media (max-width: 768px) {
       .content {
-          margin-left: 125px;
-          width: calc(100% - 125px);
+        margin-left: 125px;
+        width: calc(100% - 125px);
       }
+
       .sidebar {
         width: 125px;
       }
     }
+
     /* สไตล์รูปโปรไฟล์ */
     .profile-icon {
       width: 40px;
@@ -201,22 +215,23 @@
     }
   </style>
 </head>
+
 <body>
 
   <!-- แถบเมนูด้านซ้าย -->
   <div class="sidebar" id="sidebar">
     <!-- ปุ่มสามขีด -->
     <button class="toggle-button" id="toggleButton" onclick="toggleSidebar()">☰</button>
-    
+
     <!-- รายการเมนู -->
     <ul class="menu">
       <li>
-        <a href="#" onclick="window.location.href='chapter1/chapter1.html'">
+        <a href="#">
           <span class="icon">🏠</span>
           <span class="text">หน้าแรก</span>
         </a>
       </li>
-      <li>
+      <!-- <li>
         <a href="#">
           <span class="icon">ℹ️</span>
           <span class="text">เกี่ยวกับ</span>
@@ -227,9 +242,9 @@
           <span class="icon">🛠️</span>
           <span class="text">บริการ</span>
         </a>
-      </li>
+      </li> -->
       <li>
-        <a href="#">
+        <a href="#"> <!-- onclick="window.location.href='contact.html'" -->
           <span class="icon">📞</span>
           <span class="text">ติดต่อเรา</span>
         </a>
@@ -240,33 +255,38 @@
   <!-- เนื้อหา -->
   <div class="content">
     <div class="item" onclick="window.location.href='chapter1/chapter1.html'">
-        <img src="moe1.jpg" alt="Item 1" class="thumbnail">
-        <h3>บทที่ 1</h3>
-        <p>รายละเอียดของบทที่ 1</p>
+      <img src="moe1.jpg" alt="Item 1" class="thumbnail">
+      <h3>บทที่ 1</h3>
+      <p>รายละเอียดของบทที่ 1</p>
     </div>
     <div class="item" onclick="window.location.href='chapter2/chapter2.html'">
-        <img src="moe2.jpg" alt="Item 2" class="thumbnail">
-        <h3>บทที่ 2</h3>
-        <p>รายละเอียดของบทที่ 2</p>
+      <img src="moe2.jpg" alt="Item 2" class="thumbnail">
+      <h3>บทที่ 2</h3>
+      <p>รายละเอียดของบทที่ 2</p>
     </div>
     <div class="item" onclick="window.location.href='chapter3/chapter3.html'">
-        <img src="moe3.jpg" alt="Item 3" class="thumbnail">
-        <h3>บทที่ 3</h3>
-        <p>รายละเอียดของบทที่ 3</p>
+      <img src="moe3.jpg" alt="Item 3" class="thumbnail">
+      <h3>บทที่ 3</h3>
+      <p>รายละเอียดของบทที่ 3</p>
     </div>
     <!-- เพิ่มรายการอื่นๆ ที่ต้องการ -->
-</div>
+  </div>
 
   <div class="profile-icon" id="profileIcon" onclick="toggleDropdown()">
     <!-- รูปโปรไฟล์ (สามารถแทนที่ด้วยรูปจริงได้) -->
+  <?php require 'profile_picture.php'; ?>
+    <img src="uploads/<?php echo htmlspecialchars($profile_picture); ?>" alt="Profile Picture" width="100">
   </div>
 
   <!-- เมนูย่อย -->
   <div class="dropdown-menu" id="dropdownMenu">
     <a href="#" onclick="window.location.href='profile.php'">โปรไฟล์</a>
-    <a href="#">การตั้งค่า</a>
+    <a href="#" onclick="window.location.href='editPro.php'">แก้ไขโปรไฟล์</a>
     <a href="#" onclick="window.location.href='logout.php'">ออกจากระบบ</a>
   </div>
+  <?php require 'profile_picture.php'; ?>
+  <?php $profile_picture = isset($profile_picture) ? $profile_picture : 'moe2.jng'; ?>
+  <img src="uploads/<?php echo htmlspecialchars($profile_picture); ?>" alt="Profile Picture" width="100">
   <!-- JavaScript -->
   <script>
     function toggleSidebar() {
@@ -280,7 +300,7 @@
     }
 
     // ปิดเมนูเมื่อคลิกที่ไหนก็ได้ภายนอกเมนู
-    window.onclick = function(event) {
+    window.onclick = function (event) {
       if (!event.target.matches('.profile-icon')) {
         const dropdownMenu = document.getElementById('dropdownMenu');
         if (dropdownMenu.classList.contains('show')) {
@@ -289,6 +309,6 @@
       }
     }
   </script>
-
 </body>
+
 </html>

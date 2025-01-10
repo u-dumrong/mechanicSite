@@ -41,7 +41,7 @@ document.getElementById('loginButton').addEventListener('click', function () {
                 if (data.role === 'teacher') {
                     window.location.href = "teacherMain.html"; // เปลี่ยนไปหน้าหลักของครู
                 } else if (data.role === 'student') {
-                    window.location.href = "main.html"; // เปลี่ยนไปหน้าหลักของนักเรียน
+                    window.location.href = "main.php"; // เปลี่ยนไปหน้าหลักของนักเรียน
                 }
             } else {
                 alert(data.message); // แสดงข้อความผิดพลาดจาก PHP

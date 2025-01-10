@@ -1,25 +1,92 @@
 <!DOCTYPE html>
 <html lang="th">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>บทที่ 1</title>
-    <link rel="stylesheet" href="../styles.css">
-    <style>
-        body {
-          display: flex;
-          flex-direction: column; /* แนวตั้ง */
-          justify-content: flex-start;  /* ด้านบน */
-          align-items: center;      /* กลาง แนวนอน */
-          height: 100vh;            /* ความสูงเต็มหน้าจอ */
-          margin: 0;                /* ลบ margin ของ body */
-        }
-      </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>บทที่ 1</title>
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      /* แนวตั้ง */
+      justify-content: flex-start;
+      /* ด้านบน */
+      align-items: center;
+      /* กลาง แนวนอน */
+      height: 100vh;
+      /* ความสูงเต็มหน้าจอ */
+      margin: 0;
+      /* ลบ margin ของ body */
+      overflow: hidden;
+    }
+
+    /* เนื้อหา */
+    .content {
+      padding: 20px;
+      box-sizing: border-box;
+      overflow-y: auto;
+      /* เพิ่มเพื่อให้เลื่อนขึ้นลงได้ */
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      /* จัดให้อยู่ตรงกลางแนวนอน */
+      width: 100%;
+      /* ให้ content กว้างเต็มหน้าจอ */
+      max-width: 1200px;
+      /* จำกัดความกว้างสูงสุด */
+      margin: 0 auto;
+      /* ทำให้อยู่ตรงกลาง */
+    }
+
+    .item {
+      width: 200px;
+      height: 300px;
+      text-align: center;
+      cursor: pointer;
+      overflow: hidden;
+      /* ทำให้ไม่เกิดการ overflow ถ้าใช้ effect ที่ขยายรูป */
+      border-radius: 10px;
+      /* ขอบมน */
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      /* เงา */
+      background: linear-gradient(135deg,rgb(242, 244, 247),rgb(192, 211, 228));
+    }
+
+    .thumbnail {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      margin-bottom: 10px;
+      transition: transform 0.3s ease;
+      /* เพิ่ม transition เพื่อให้การขยายมีความนุ่มนวล */
+    }
+
+    .thumbnail:hover {
+      transform: scale(1.1);
+      /* ขยายรูปเป็น 1.1 เท่าเมื่อเมาส์ชี้ */
+    }
+  </style>
 </head>
+
 <body>
-    <button onclick="window.location.href='../main.html'">กลับไปหน้าหลัก</button>
-    <h1>บทที่ 1</h1>
-    <button onclick="window.location.href='lesson.html'">บทเรียน</button>
-    <button onclick="window.location.href='test.html'">แบบทดสอบ</button>
+  <button onclick="window.location.href='../main.php'">กลับไปหน้าหลัก</button>
+  <h1>บทที่ 1</h1>
+  <div class="content">
+    <div class="item" onclick="window.location.href='lesson.html'">
+      <img src="../moe1.jpg" alt="Item 1" class="thumbnail">
+      <h3>บทเรียน</h3>
+      <p>รายละเอียดของบทเรียน</p>
+    </div>
+    <div class="item" onclick="window.location.href='test.php'">
+      <img src="../moe2.jpg" alt="Item 2" class="thumbnail">
+      <h3>แบบทดสอบ</h3>
+      <p>รายละเอียดของแบบทดสอบ</p>
+    </div>
+    <!-- เพิ่มรายการอื่นๆ ที่ต้องการ -->
+  </div>
 </body>
+
 </html>

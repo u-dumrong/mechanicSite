@@ -18,10 +18,10 @@ $email = $_SESSION['email'];
 $user_id = $_SESSION['user_id'];
 
 // ดึงข้อมูลพื้นฐานจากตาราง users
-$stmt = $conn->prepare("SELECT username, email, role FROM users WHERE id = ?");
+$stmt = $conn->prepare("SELECT profile_picture, username, email, role FROM users WHERE id = ?");
 $stmt->bind_param("i", $user_id);
 $stmt->execute();
-$stmt->bind_result($username, $email, $role);
+$stmt->bind_result($profile_picture, $username, $email, $role);
 $stmt->fetch();
 $stmt->close();
 
@@ -66,7 +66,6 @@ $conn->close();
 </head>
 <body>
     <div class="login-container">
-        <h2>โปรไฟล์ของคุณ</h2>
         <div class="profile-info">
             <p><strong>ชื่อผู้ใช้:</strong> <?php echo htmlspecialchars($username); ?></p>
             <p><strong>อีเมล:</strong> <?php echo htmlspecialchars($email); ?></p>
@@ -79,9 +78,16 @@ $conn->close();
             <?php endif; ?>
         </div> 
         <div class="button-container">
-            <button onclick="window.location.href='main.html'">กลับไปหน้าหลัก</button>
+            <button onclick="window.location.href='main.php'">กลับไปหน้าหลัก</button>
             <!-- <button class="red-button" onclick="window.location.href='logout.php'">ลงชื่อออก</button> -->
         </div>
     </div>
+    <?php require 'profile_picture.php'; ?>
+
+        <?php if ($profile_picture): ?> 
+            <img src="uploads/<?php echo htmlspecialchars($profile_picture); ?>" alt="Profile Picture" width="100">
+        <?php else: ?>
+            <p>ยังไม่มีรูปโปรไฟล์</p>
+        <?php endif; ?>
 </body>
 </html>
