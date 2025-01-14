@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>บทที่ 1</title>
-  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="../../styles.css">
   <style>
     body {
       display: flex;
@@ -53,6 +53,7 @@
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
       /* เงา */
       background: linear-gradient(135deg,rgb(242, 244, 247),rgb(192, 211, 228));
+      transition: transform 0.3s ease;
     }
 
     .thumbnail {
@@ -60,11 +61,10 @@
       height: 150px;
       object-fit: cover;
       margin-bottom: 10px;
-      transition: transform 0.3s ease;
       /* เพิ่ม transition เพื่อให้การขยายมีความนุ่มนวล */
     }
 
-    .thumbnail:hover {
+    .item:hover {
       transform: scale(1.1);
       /* ขยายรูปเป็น 1.1 เท่าเมื่อเมาส์ชี้ */
     }
@@ -72,16 +72,16 @@
 </head>
 
 <body>
-  <button onclick="window.location.href='../main.php'">กลับไปหน้าหลัก</button>
+  <button onclick="window.location.href='../../main.php'">กลับไปหน้าหลัก</button>
   <h1>บทที่ 1</h1>
   <div class="content">
     <div class="item" onclick="window.location.href='lesson.html'">
-      <img src="../moe1.jpg" alt="Item 1" class="thumbnail">
+      <img src="../../images/moe1.jpg" alt="Item 1" class="thumbnail">
       <h3>บทเรียน</h3>
       <p>รายละเอียดของบทเรียน</p>
     </div>
-    <div class="item" onclick="window.location.href='test.php'">
-      <img src="../moe2.jpg" alt="Item 2" class="thumbnail">
+    <div class="item" onclick="window.location.href='test.html'">
+      <img src="../../images/moe2.jpg" alt="Item 2" class="thumbnail">
       <h3>แบบทดสอบ</h3>
       <p>รายละเอียดของแบบทดสอบ</p>
     </div>

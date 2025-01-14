@@ -34,7 +34,7 @@ $conn->close();
 <?php
 session_start();
 
-include 'dbConfig.php'; // เรียกการเชื่อมต่อฐานข้อมูล
+include '../dbConfig.php'; // เรียกการเชื่อมต่อฐานข้อมูล
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $identifier = $conn->real_escape_string($_POST['identifier']); // รับค่าชื่อผู้ใช้หรืออีเมล

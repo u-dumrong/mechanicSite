@@ -47,6 +47,7 @@ $conn->close();
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -55,39 +56,61 @@ $conn->close();
     <style>
         .button-container {
             display: flex;
-            flex-direction: column; /* แนวตั้ง */
-            align-items: center;      /* กลาง แนวนอน */          /* ลบ margin ของ body */
+            flex-direction: column;
+            /* แนวตั้ง */
+            align-items: center;
+            /* กลาง แนวนอน */
+            /* ลบ margin ของ body */
         }
+
         button {
             margin: 10px auto;
             width: 50%;
         }
+
+        .profile-icon {
+            width: 60px;
+            height: 60px;
+            transition: width 0.3s ease, height 0.3s ease;
+            margin: 10px 0;
+            border-radius: 50%;
+            background-image: url('profile.png');
+            /* กำหนดภาพพื้นหลัง */
+            background-size: cover;
+            object-fit: cover;
+            /* ให้รูปภาพพอดีกับขอบวงกลม */
+            /* ปรับขนาดภาพให้พอดี */
+            background-repeat: no-repeat;
+            /* ป้องกันการซ้ำของภาพ */
+            cursor: pointer;
+            /* ระยะห่างจากด้านขวา */
+            overflow: hidden;
+            /* ตัดส่วนที่เกินออก */
+        }
     </style>
 </head>
+
 <body>
     <div class="login-container">
         <div class="profile-info">
+            <div>
+            <img src="uploads/<?php echo htmlspecialchars($profile_picture); ?>" alt=" " class="profile-icon">
+            </div>
             <p><strong>ชื่อผู้ใช้:</strong> <?php echo htmlspecialchars($username); ?></p>
             <p><strong>อีเมล:</strong> <?php echo htmlspecialchars($email); ?></p>
             <p><strong>สถานะ:</strong> <?php echo htmlspecialchars($role === 'student' ? 'นักศึกษา' : 'ครู'); ?></p>
-            
+
             <?php if ($role === 'student'): ?>
                 <p><strong>คะแนนล่าสุด:</strong> <?php echo htmlspecialchars($score); ?></p>
             <?php elseif ($role === 'teacher'): ?>
                 <p><strong>แผนก:</strong> <?php echo htmlspecialchars($department); ?></p>
             <?php endif; ?>
-        </div> 
+        </div>
         <div class="button-container">
             <button onclick="window.location.href='main.php'">กลับไปหน้าหลัก</button>
             <!-- <button class="red-button" onclick="window.location.href='logout.php'">ลงชื่อออก</button> -->
         </div>
     </div>
-    <?php require 'profile_picture.php'; ?>
-
-        <?php if ($profile_picture): ?> 
-            <img src="uploads/<?php echo htmlspecialchars($profile_picture); ?>" alt="Profile Picture" width="100">
-        <?php else: ?>
-            <p>ยังไม่มีรูปโปรไฟล์</p>
-        <?php endif; ?>
 </body>
+
 </html>

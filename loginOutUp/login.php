@@ -1,6 +1,6 @@
 <?php
 // login.php
-include 'dbConfig.php'; // เชื่อมต่อฐานข้อมูล
+include '../dbConfig.php'; // เชื่อมต่อฐานข้อมูล
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'];

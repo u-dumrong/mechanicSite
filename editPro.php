@@ -64,13 +64,12 @@ $stmt->close();
 $conn->close();
 ?>
 
-    <?php require 'profile_picture.php'; ?>
-
         <?php if ($profile_picture): ?> 
             <img src="uploads/<?php echo htmlspecialchars($profile_picture); ?>" alt="Profile Picture" width="100">
         <?php else: ?>
             <p>ยังไม่มีรูปโปรไฟล์</p>
         <?php endif; ?>
     </p>
+    <button onclick="window.location.href='main.php'">กลับไปหน้าหลัก</button>
 </body>
 </html>

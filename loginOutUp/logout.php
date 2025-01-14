@@ -8,6 +8,6 @@ session_unset();
 session_destroy();
 
 // ส่งผู้ใช้กลับไปยังหน้าล็อกอิน
-header("Location: index.html");
+header("Location: ../index.html");
 exit();
 ?>

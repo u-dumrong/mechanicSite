@@ -22,7 +22,7 @@ document.getElementById('loginButton').addEventListener('click', function () {
     const formData = new FormData(document.getElementById('loginForm'));
 
     // ใช้ Fetch API เพื่อส่งคำขอไปยังไฟล์ PHP
-    fetch('processLogin.php', {
+    fetch('loginOutUp/processLogin.php', {
         method: 'POST',
         body: formData
     })
@@ -51,9 +51,4 @@ document.getElementById('loginButton').addEventListener('click', function () {
             console.error('Error:', error);
             alert("เกิดข้อผิดพลาดในการเชื่อมต่อกับเซิร์ฟเวอร์!");
         });
-});
-
-document.getElementById("signupButton").addEventListener("click", function() {
-    // เปลี่ยนเส้นทางไปยังหน้า signup.html
-    window.location.href = "signup.html";
 });

@@ -1,6 +1,6 @@
 <?php
 // เรียก config.php
-include 'dbConfig.php';
+include '../dbConfig.php';
 
 /*
     - รับค่าจาก JavaScript

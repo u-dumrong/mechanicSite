@@ -1,3 +1,56 @@
+<?php
+session_start();
+require 'dbConfig.php'; // เชื่อมต่อฐานข้อมูล
+
+// ตรวจสอบว่าผู้ใช้เข้าสู่ระบบหรือไม่
+if (!isset($_SESSION['user_id'])) {
+  echo '<!DOCTYPE html>
+    <html lang="th">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>แจ้งเตือน</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                text-align: center;
+                padding: 50px;
+                background-color: #f9f9f9;
+            }
+            .message-box {
+                display: inline-block;
+                padding: 20px;
+                border: 2px solid #ff0000;
+                background-color: #fff4f4;
+                color: #ff0000;
+                border-radius: 5px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            }
+        </style>
+    </head>
+    <body>
+        <div class="message-box">
+            <h1>กรุณา Login เพื่อเข้าสู่ระบบ</h1>
+            <p>ระบบจะนำคุณไปยังหน้าแรกใน 2 วินาที...</p>
+        </div>
+    </body>
+    </html>
+    ';
+		header('refresh:2;index.html');
+  exit();
+}
+
+$user_id = $_SESSION['user_id'];
+
+// ดึงข้อมูลพื้นฐานจากตาราง users
+$stmt = $conn->prepare("SELECT username, email, role, profile_picture FROM users WHERE id = ?");
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$stmt->bind_result($username, $email, $role, $profile_picture);
+$stmt->fetch();
+$stmt->close();
+$conn->close();
+?>
 <!DOCTYPE html>
 <html lang="th">
 
@@ -19,7 +72,7 @@
     /* แถบเมนูด้านซ้าย */
     .sidebar {
       width: 250px;
-      background-color:rgb(0, 89, 124);
+      background-color: rgb(0, 89, 124);
       color: white;
       height: 100%;
       padding: 20px 10px;
@@ -52,7 +105,7 @@
     }
 
     .toggle-button:hover {
-      color:rgb(79, 209, 183);
+      color: rgb(79, 209, 183);
     }
 
     /* รายการเมนู */
@@ -86,7 +139,7 @@
     }
 
     .menu li a:hover {
-      background-color:rgb(0, 107, 150);
+      background-color: rgb(0, 107, 150);
     }
 
     /* ไอคอนเมนู */
@@ -137,7 +190,8 @@
       /* ขอบมน */
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
       /* เงา */
-      background: linear-gradient(135deg,rgb(242, 244, 247),rgb(192, 211, 228));
+      background: linear-gradient(135deg, rgb(242, 244, 247), rgb(192, 211, 228));
+      transition: transform 0.3s ease;
     }
 
     .thumbnail {
@@ -145,11 +199,10 @@
       height: 150px;
       object-fit: cover;
       margin-bottom: 10px;
-      transition: transform 0.3s ease;
       /* เพิ่ม transition เพื่อให้การขยายมีความนุ่มนวล */
     }
 
-    .thumbnail:hover {
+    .item:hover {
       transform: scale(1.1);
       /* ขยายรูปเป็น 1.1 เท่าเมื่อเมาส์ชี้ */
     }
@@ -158,6 +211,75 @@
       margin-left: 60px;
       width: calc(100% - 60px);
     }
+
+    /* สไตล์รูปโปรไฟล์ */
+    .profile-icon {
+      width: 60px;
+      height: 60px;
+      transition: width 0.3s ease, height 0.3s ease;
+      margin: 10px 0;
+      border-radius: 50%;
+      background-image: url('images/profile.png');
+      /* กำหนดภาพพื้นหลัง */
+      background-size: cover;
+      object-fit: cover;
+      /* ให้รูปภาพพอดีกับขอบวงกลม */
+      /* ปรับขนาดภาพให้พอดี */
+      background-repeat: no-repeat;
+      /* ป้องกันการซ้ำของภาพ */
+      cursor: pointer;
+      position: fixed;
+      top: 10px;
+      /* ระยะห่างจากด้านบน */
+      right: 10px;
+      /* ระยะห่างจากด้านขวา */
+      overflow: hidden;
+      /* ตัดส่วนที่เกินออก */
+    }
+
+    /* เมนูย่อย (dropdown) */
+    .dropdown-menu {
+      visibility: hidden;  /* ซ่อนเมนูเริ่มต้น */
+      position: absolute;
+      top: 80px;
+      right: 0;
+      background-color: #fff;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      min-width: 100px;
+      border-radius: 5px;
+      z-index: 1;
+      transform: translateY(-10px);
+      /* เริ่มต้นที่เลื่อนขึ้นไปเล็กน้อย */
+      opacity: 0;
+      /* เริ่มต้นด้วยความโปร่งใส */
+      transition: transform 0.3s ease, opacity 0.3s ease, visibility 0s linear 0.3s; /* การเคลื่อนไหว */
+      /* การเคลื่อนไหวของตำแหน่งและความโปร่งใส */
+    }
+
+    /* เมื่อเมนูเปิด */
+    .dropdown-menu.show {
+      visibility: visible;  /* ทำให้เมนูมองเห็น */
+      transform: translateY(0);
+      /* เลื่อนลงมา */
+      opacity: 1;
+      /* ทำให้เห็น */
+      transition: transform 0.3s ease, opacity 0.3s ease; /* รักษาการเคลื่อนไหวเมื่อเปิดเมนู */
+    }
+
+    /* รายการในเมนู */
+    .dropdown-menu a {
+      display: block;
+      padding: 10px 8px;
+      text-decoration: none;
+      color: black;
+      transition: background-color 0.2s;
+    }
+
+    /* เปลี่ยนสีเมื่อ hover */
+    .dropdown-menu a:hover {
+      background-color: #ddd;
+    }
+
 
     /* Responsive: ปรับขนาดให้เหมาะสมกับหน้าจอเล็ก */
     @media (max-width: 768px) {
@@ -169,49 +291,15 @@
       .sidebar {
         width: 125px;
       }
-    }
 
-    /* สไตล์รูปโปรไฟล์ */
-    .profile-icon {
-      width: 40px;
-      height: 40px;
-      margin: 10px;
-      border-radius: 50%;
-      background-color: #888;
-      cursor: pointer;
-      position: relative;
-    }
+      .profile-icon {
+        width: 40px;
+        height: 40px;
+      }
 
-    /* เมนูย่อย (dropdown) */
-    .dropdown-menu {
-      display: none;
-      position: absolute;
-      top: 50px;
-      right: 0;
-      background-color: #fff;
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-      min-width: 160px;
-      border-radius: 5px;
-      z-index: 1;
-    }
-
-    /* รายการในเมนู */
-    .dropdown-menu a {
-      display: block;
-      padding: 12px 16px;
-      text-decoration: none;
-      color: black;
-      transition: background-color 0.2s;
-    }
-
-    /* เปลี่ยนสีเมื่อ hover */
-    .dropdown-menu a:hover {
-      background-color: #ddd;
-    }
-
-    /* เมื่อเมนูเปิด */
-    .dropdown-menu.show {
-      display: block;
+      .dropdown-menu {
+        top: 60px;
+      }
     }
   </style>
 </head>
@@ -254,39 +342,35 @@
 
   <!-- เนื้อหา -->
   <div class="content">
-    <div class="item" onclick="window.location.href='chapter1/chapter1.html'">
-      <img src="moe1.jpg" alt="Item 1" class="thumbnail">
+    <div class="item" onclick="window.location.href='chapter/chapter1/chapter1.html'">
+      <img src="images/moe1.jpg" alt="Item 1" class="thumbnail">
       <h3>บทที่ 1</h3>
       <p>รายละเอียดของบทที่ 1</p>
     </div>
-    <div class="item" onclick="window.location.href='chapter2/chapter2.html'">
-      <img src="moe2.jpg" alt="Item 2" class="thumbnail">
+    <div class="item" onclick="window.location.href='chapter/chapter2/chapter2.html'">
+      <img src="images/moe2.jpg" alt="Item 2" class="thumbnail">
       <h3>บทที่ 2</h3>
       <p>รายละเอียดของบทที่ 2</p>
     </div>
-    <div class="item" onclick="window.location.href='chapter3/chapter3.html'">
-      <img src="moe3.jpg" alt="Item 3" class="thumbnail">
+    <div class="item" onclick="window.location.href='chapter/chapter3/chapter3.html'">
+      <img src="images/moe3.jpg" alt="Item 3" class="thumbnail">
       <h3>บทที่ 3</h3>
       <p>รายละเอียดของบทที่ 3</p>
     </div>
     <!-- เพิ่มรายการอื่นๆ ที่ต้องการ -->
   </div>
 
-  <div class="profile-icon" id="profileIcon" onclick="toggleDropdown()">
+  <div>
     <!-- รูปโปรไฟล์ (สามารถแทนที่ด้วยรูปจริงได้) -->
-  <?php require 'profile_picture.php'; ?>
-    <img src="uploads/<?php echo htmlspecialchars($profile_picture); ?>" alt="Profile Picture" width="100">
+    <img src="uploads/<?php echo htmlspecialchars($profile_picture); ?>" alt=" " class="profile-icon" id="profileIcon" onclick="toggleDropdown()">
   </div>
 
   <!-- เมนูย่อย -->
   <div class="dropdown-menu" id="dropdownMenu">
     <a href="#" onclick="window.location.href='profile.php'">โปรไฟล์</a>
     <a href="#" onclick="window.location.href='editPro.php'">แก้ไขโปรไฟล์</a>
-    <a href="#" onclick="window.location.href='logout.php'">ออกจากระบบ</a>
+    <a href="#" onclick="window.location.href='loginOutUp/logout.php'">ออกจากระบบ</a>
   </div>
-  <?php require 'profile_picture.php'; ?>
-  <?php $profile_picture = isset($profile_picture) ? $profile_picture : 'moe2.jng'; ?>
-  <img src="uploads/<?php echo htmlspecialchars($profile_picture); ?>" alt="Profile Picture" width="100">
   <!-- JavaScript -->
   <script>
     function toggleSidebar() {
@@ -296,12 +380,12 @@
 
     function toggleDropdown() {
       const dropdownMenu = document.getElementById('dropdownMenu');
-      dropdownMenu.classList.toggle('show');
+      dropdownMenu.classList.toggle('show'); // สลับการแสดง/ซ่อนเมนู
     }
 
     // ปิดเมนูเมื่อคลิกที่ไหนก็ได้ภายนอกเมนู
-    window.onclick = function (event) {
-      if (!event.target.matches('.profile-icon')) {
+    window.onclick = function(event) {
+      if (!event.target.matches('.profile-icon') && !event.target.closest('.dropdown-menu')) {
         const dropdownMenu = document.getElementById('dropdownMenu');
         if (dropdownMenu.classList.contains('show')) {
           dropdownMenu.classList.remove('show');
