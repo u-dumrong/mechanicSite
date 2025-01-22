@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page B</title>
+  <style>
+    .content {
+      margin-top: 20px;
+      padding: 15px;
+      background-color: #f9f9f9;
+      border: 1px solid #ddd;
+      display: none; /* ซ่อนเนื้อหาเริ่มต้น */
+      border-radius: 5px;
+    }
+  </style>
+  <script>
+    function updateContentVisibility() {
+      // ดึงสถานะจาก Local Storage
+      const content = document.getElementById("content");
+      const isVisible = localStorage.getItem("contentVisibility") === "true";
+      content.style.display = isVisible ? "block" : "none";
+    }
+
+    // เรียกใช้ฟังก์ชันเมื่อโหลดหน้า
+    window.onload = updateContentVisibility;
+
+    // ตั้งตัวฟังเพื่อตรวจจับการเปลี่ยนแปลงของ Local Storage
+    window.addEventListener("storage", updateContentVisibility);
+  </script>
+</head>
+<body>
+  <h1>หน้า B</h1>
+  <div id="content" class="content">
+    <p>นี่คือเนื้อหาบนหน้า B ที่สามารถเปิด/ปิดได้</p>
+  </div>
+</body>
+</html>

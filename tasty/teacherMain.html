@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>หน้าหลัก</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .login-container {
+            display: flex;
+            flex-direction: column;
+            /* แนวตั้ง */
+        }
+
+        button {
+            width: 50%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login-container">
+        <h1>ยินดีต้อนรับอาจารย์สู่หน้าหลัก</h1>
+        <!--
+        <button onclick="window.location.href='chapter1/chapter1.html'">บทที่ 1</button>
+        <button onclick="window.location.href='chapter2/chapter2.html'">บทที่ 2</button>
+        <button onclick="window.location.href='chapter3/chapter3.html'">บทที่ 3</button>
+    -->
+        <button onclick="window.location.href='setTime.html'">ตั้งเวลา</button>
+        <button onclick="window.location.href='profile.php'">โปรไฟล์</button>
+        <button onclick="toggleContentOnPageB()">เปิด/ปิดเนื้อหาบนหน้า B</button>
+    </div>
+    <script>
+        function toggleContentOnPageB() {
+            // บันทึกสถานะการเปิด/ปิดลงใน Local Storage
+            const currentState = localStorage.getItem("contentVisibility") === "true";
+            localStorage.setItem("contentVisibility", !currentState);
+            alert("เนื้อหาบนหน้า B ถูกเปลี่ยนสถานะ");
+        }
+    </script>
+</body>
+<!--
+    <footer>
+        <button onclick="window.location.href='index.html'">ล็อกเอาท์</button>
+    </footer>
+-->
+
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>หน้าหลัก</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .login-container {
+            display: flex;
+            flex-direction: column;
+        }
+
+        button {
+            width: 50%;
+        }
+
+        #container {
+            display: none; /* เริ่มต้นปิดเนื้อหา */
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login-container">
+        <h1>ยินดีต้อนรับอาจารย์สู่หน้าหลัก</h1>
+        <button onclick="window.location.href='setTime.html'">ตั้งเวลา</button>
+        <button onclick="window.location.href='profile.php'">โปรไฟล์</button>
+    </div>
+    <div id="countdown">ยังไม่ได้ตั้งเวลา</div>
+    <div id="container">เนื้อหาเปิดใช้งานเมื่อเวลายังไม่หมด</div>
+
+    <script>
+        const countdownDisplay = document.getElementById('countdown');
+        const content = document.getElementById('container');
+
+        function formatTime(seconds) {
+            const hours = Math.floor(seconds / 3600);
+            const minutes = Math.floor((seconds % 3600) / 60);
+            const secs = seconds % 60;
+            return `${hours}:${String(minutes).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+        }
+
+        function updateContentVisibility() {
+            const endTime = localStorage.getItem('endTime');
+            if (!endTime) {
+                countdownDisplay.textContent = 'ยังไม่ได้ตั้งเวลา';
+                content.style.display = 'none';
+                return;
+            }
+
+            const now = Date.now();
+            const timeLeft = Math.max(0, Math.floor((endTime - now) / 1000)); // เวลาเหลือในวินาที
+
+            if (timeLeft > 0) {
+                countdownDisplay.textContent = formatTime(timeLeft);
+                content.style.display = 'block'; // เปิดเนื้อหา
+            } else {
+                countdownDisplay.textContent = 'หมดเวลา!';
+                content.style.display = 'none'; // ปิดเนื้อหา
+                clearInterval(intervalId); // หยุดการอัปเดตเมื่อหมดเวลา
+            }
+        }
+
+        const intervalId = setInterval(updateContentVisibility, 1000); // อัปเดตทุกวินาที
+        updateContentVisibility();
+    </script>
+</body>
+
+</html>

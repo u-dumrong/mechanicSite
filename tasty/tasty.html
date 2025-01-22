@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page A</title>
+  <script>
+    function toggleContentOnPageB() {
+      // บันทึกสถานะการเปิด/ปิดลงใน Local Storage
+      const currentState = localStorage.getItem("contentVisibility") === "true";
+      localStorage.setItem("contentVisibility", !currentState);
+      alert("เนื้อหาบนหน้า B ถูกเปลี่ยนสถานะ");
+    }
+  </script>
+</head>
+<body>
+  <h1>หน้า A</h1>
+  <button onclick="toggleContentOnPageB()">เปิด/ปิดเนื้อหาบนหน้า B</button>
+</body>
+</html>

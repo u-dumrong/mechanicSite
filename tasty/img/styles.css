@@ -1,0 +1,158 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  scroll-behavior: smooth;
+  /* เปิดใช้งานการเลื่อนลื่นไหล */
+}
+
+.bg {
+  animation: slide 12s ease-in-out infinite alternate;
+  background-image: linear-gradient(-60deg, #facb05 50%, #041c54 50%);
+  bottom: 0;
+  left: -50%;
+  opacity: .5;
+  position: fixed;
+  right: -50%;
+  top: 0;
+  z-index: -1;
+}
+
+.bg2 {
+  animation-direction: alternate-reverse;
+  animation-duration: 16s;
+}
+
+.bg3 {
+  animation-duration: 20s;
+}
+
+@keyframes slide {
+  0% {
+    transform: translateX(-25%);
+  }
+
+  100% {
+    transform: translateX(25%);
+  }
+}
+
+.container {
+  display: flex;
+  width: 100%;
+}
+
+.sidebar {
+  width: 20%;
+  /* โปร่งใสเล็กน้อย */
+  background: rgba(170, 170, 170, 0.3);
+  /* เพิ่มเอฟเฟกต์เบลอ */
+  backdrop-filter: blur(10px);
+  /* รองรับเบราว์เซอร์ที่ใช้ -webkit- */
+  -webkit-backdrop-filter: blur(10px);
+  transition: width 0.3s ease;
+  padding: 10px;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.sidebar.hidden {
+  width: 60px;
+  /* ย่อขนาดแถบเมนูเมื่อปิด */
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  opacity: 1;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.sidebar.hidden ul {
+  opacity: 0;
+  transform: translateX(-20px);
+}
+
+.sidebar ul li {
+  margin-bottom: 10px;
+}
+
+.sidebar ul li a {
+  text-decoration: none;
+  color: #ffffff;
+  padding: 5px 10px;
+  display: block;
+  border-radius: 5px;
+}
+
+.sidebar ul li a.active {
+  background-color: #facb05;
+  color: #041c54;
+}
+
+.toggle-button {
+  display: none;
+  background-color: transparent;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 24px;
+  margin-left: auto; /* ดันปุ่มไปด้านขวา */
+  margin-right: 5px;
+  padding: 0;
+  margin-bottom: 30px;
+}
+
+.toggle-button:hover {
+  color: #facb05;
+}
+
+
+.content {
+  width: 80%;
+  padding: 20px;
+}
+
+.content section {
+  margin-bottom: 50px;
+}
+
+.frame {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%;
+  /* อัตราส่วน 16:9 */
+  background: #eee;
+  /* สีพื้นหลังขณะรอโหลดภาพ */
+  border: 1px solid #ddd;
+  overflow: hidden;
+  margin-bottom: 20px;
+  border-radius: 10px;
+}
+
+.frame img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (max-width: 768px) {
+  .toggle-button {
+    display: block;
+  }
+
+  .sidebar {
+    width: 125px;
+  }
+
+  .sidebar.hidden {
+    width: 30px;
+    /* ย่อขนาดแถบเมนูเมื่อปิด */
+  }
+}
