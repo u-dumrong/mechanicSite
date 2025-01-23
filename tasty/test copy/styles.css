@@ -2,7 +2,7 @@
 
 body {
     font-family: k2d;
-    color: white;
+    color: black;
     font-size: larger;
 }
 
@@ -12,7 +12,7 @@ button {
 
 .container {
     /* โปร่งใสเล็กน้อย */
-    background: rgba(170, 170, 170, 0.678);
+    background: rgba(255, 255, 255, 0.678);
     /* เพิ่มเอฟเฟกต์เบลอ */
     backdrop-filter: blur(10px);
     /* รองรับเบราว์เซอร์ที่ใช้ -webkit- */

@@ -39,7 +39,7 @@ document.getElementById('loginButton').addEventListener('click', function () {
             if (data.status === 'success') {
                 alert("ล็อกอินสำเร็จ!");
                 if (data.role === 'teacher') {
-                    window.location.href = "teacherMain.html"; // เปลี่ยนไปหน้าหลักของครู
+                    window.location.href = "teacherMain.php"; // เปลี่ยนไปหน้าหลักของครู
                 } else if (data.role === 'student') {
                     window.location.href = "main.php"; // เปลี่ยนไปหน้าหลักของนักเรียน
                 }
