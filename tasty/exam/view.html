@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Page</title>
+    <style>
+        .page {
+            display: none; /* ซ่อนเนื้อหาทั้งหมดก่อน */
+        }
+    </style>
+</head>
+<body>
+    <h1>View Pages</h1>
+    <div id="page1" class="page">
+        <h2>This is Page 1</h2>
+        <p>Welcome to Page 1 content!</p>
+    </div>
+    <!-- เพิ่ม div สำหรับหน้าอื่นๆ ตามต้องการ -->
+
+    <script>
+        async function updatePageVisibility(pageName) {
+            // ดึงสถานะจากฐานข้อมูล
+            const response = await fetch(`get_page_status.php?page_name=${pageName}`);
+            const data = await response.json();
+
+            // อัปเดตการแสดงผลของแต่ละหน้า
+            const pageDiv = document.getElementById(pageName);
+            if (data.is_visible) {
+                pageDiv.style.display = 'block';
+            } else {
+                pageDiv.style.display = 'none';
+            }
+        }
+
+        // อัปเดตสถานะของหน้า
+        updatePageVisibility('page1');
+        // เรียกฟังก์ชัน updatePageVisibility() สำหรับหน้าอื่นๆ ที่ต้องการ
+    </script>
+</body>
+</html>

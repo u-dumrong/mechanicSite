@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control Multiple Pages</title>
+    <style>
+        button {
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Control Pages</h1>
+    <button onclick="togglePage('page1')">Toggle Page 1</button>
+    <button onclick="togglePage('page2')">Toggle Page 2</button>
+    <button onclick="togglePage('page3')">Toggle Page 3</button>
+    <!-- เพิ่มปุ่มสำหรับหน้าอื่นๆ ตามต้องการ -->
+
+    <script>
+        async function togglePage(pageName) {
+            // ดึงสถานะปัจจุบันจากฐานข้อมูล
+            const response = await fetch(`get_page_status.php?page_name=${pageName}`);
+            const data = await response.json();
+
+            // สลับสถานะการแสดงผล
+            const isVisible = data.is_visible;
+            const newStatus = isVisible ? 'false' : 'true';
+
+            // ส่งการเปลี่ยนแปลงไปที่เซิร์ฟเวอร์เพื่ออัปเดตสถานะ
+            const updateResponse = await fetch(`toggle_page.php?page_name=${pageName}&is_visible=${newStatus}`);
+            const updateData = await updateResponse.text();
+
+            alert(updateData); // แจ้งเตือนสถานะที่เปลี่ยน
+        }
+    </script>
+</body>
+</html>
