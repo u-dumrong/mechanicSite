@@ -12,3 +12,9 @@ CREATE TABLE page_status (
     page_name VARCHAR(255) NOT NULL,
     is_visible TINYINT(1) NOT NULL DEFAULT 0
 );
+
+CREATE TABLE schedule (
+    page_name VARCHAR(50) PRIMARY KEY,
+    show_time DATETIME,
+    hide_time DATETIME
+);

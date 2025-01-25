@@ -1,0 +1,30 @@
+/* student_style.css */
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 20px;
+}
+
+.exam-container {
+    width: 50%;
+    margin: auto;
+    background: #f4f4f4;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+#timeDisplay {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+input[type="submit"] {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+input[type="submit"]:disabled {
+    background-color: #d3d3d3;
+    cursor: not-allowed;
+}

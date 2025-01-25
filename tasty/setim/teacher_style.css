@@ -1,0 +1,55 @@
+/* teacher_style.css */
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 20px;
+}
+
+.container {
+    width: 50%;
+    margin: auto;
+    background: #f4f4f4;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+form {
+    margin-bottom: 30px;
+}
+
+input[type="datetime-local"] {
+    padding: 10px;
+    font-size: 16px;
+    width: 200px;
+}
+
+input[type="submit"] {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+#currentTime {
+    margin-top: 30px;
+}
+
+#currentTime h2 {
+    font-size: 18px;
+}
+
+#currentTime p {
+    font-size: 16px;
+    font-weight: bold;
+}
