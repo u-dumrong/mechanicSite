@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Visibility</title>
+    <style>
+        .page {
+            display: none;
+            /* ซ่อนเนื้อหาทั้งหมดก่อน */
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="page" id="pageContent">
+        <h1>เนื้อหาของหน้าที่จะบล็อก</h1>
+        <p>เนื้อหานี้จะถูกแสดงผลถ้าเงื่อนไขใน PHP ตรงกับเวลาในช่วงที่กำหนด</p>
+    </div>
+
+    <script>
+        // Define the page name you want to search for
+        const pageName = 'page1';
+
+        // Fetch the start_time and end_time from the database
+        fetch(`get_page_status.php?page_name=${encodeURIComponent(pageName)}`)
+            .then(response => response.json())  // Parse the JSON response
+            .then(data => {
+                // Assuming the response contains start_time and end_time
+                const startTime = new Date(data.start_time);
+                const endTime = new Date(data.end_time);
+                const currentDate = new Date();
+
+                // Now you can use start_time and end_time
+                console.log("Start Time:", startTime);
+                console.log("End Time:", endTime);
+
+                if (currentDate >= startTime && currentDate <= endTime) {
+                    document.getElementById('pageContent').style.display = 'block'; // แสดงเนื้อหา
+                    console.log("Time is being tracked for the test.");
+                } else if(currentDate < startTime) {
+                    console.log("The exam hasn't started yet.");
+                } else {
+                    console.log("Out of time!");
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+            });
+    </script>
+
+</body>
+
+</html>

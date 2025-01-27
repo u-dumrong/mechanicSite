@@ -304,18 +304,25 @@ $result = $conn->query($sql);
         }
 
         table {
-            background-color: white; /* พื้นหลังสีขาวเฉพาะตาราง */
+            background-color: white;
+            /* พื้นหลังสีขาวเฉพาะตาราง */
             width: 80%;
             border-collapse: collapse;
             margin: 50px auto;
-            border: 2px solid black; /* เส้นรอบขอบตาราง */
+            border: 2px solid black;
+            /* เส้นรอบขอบตาราง */
+        }
+
+        tr:nth-child(even) {
+            background-color: #D6EEEE;
         }
 
         th,
         td {
             padding: 10px;
             text-align: left;
-            border: 1px solid black; /* เส้นระหว่างแถวและคอลัมน์ */
+            border: 1px solid black;
+            /* เส้นระหว่างแถวและคอลัมน์ */
         }
 
         img {

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control Multiple Pages</title>
+    <style>
+        button {
+            margin: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <!--<h1>Control Pages</h1>
+    <button onclick="togglePage('page1')">Toggle Page 1</button>
+    <button onclick="togglePage('page2')">Toggle Page 2</button>
+    <button onclick="togglePage('page3')">Toggle Page 3</button>
+     เพิ่มปุ่มสำหรับหน้าอื่นๆ ตามต้องการ -->
+    <div>
+        <h2>Set Schedule for Pages</h2>
+        <form onsubmit="setSchedule(event)">
+            <label for="page">Page:</label>
+            <select id="page" name="page">
+                <option value="page1">Page 1</option>
+                <option value="page2">Page 2</option>
+                <option value="page3">Page 3</option>
+            </select>
+            <br />
+            <label for="start_time">Start Time:</label>
+            <input type="datetime-local" id="start_time" name="start_time" required>
+            <br />
+            <label for="end_time">End Time:</label>
+            <input type="datetime-local" id="end_time" name="end_time" required>
+            <br />
+            <button type="submit">Set Schedule</button>
+        </form>
+    </div>
+    <!--<script>
+        async function togglePage(pageName) {
+            // ดึงสถานะปัจจุบันจากฐานข้อมูล
+            const response = await fetch(`get_page_status.php?page_name=${pageName}`);
+            const data = await response.json();
+
+            // สลับสถานะการแสดงผล
+            const isVisible = data.is_visible;
+            const newStatus = isVisible ? 'false' : 'true';
+
+            // ส่งการเปลี่ยนแปลงไปที่เซิร์ฟเวอร์เพื่ออัปเดตสถานะ
+            const updateResponse = await fetch(`toggle_page.php?page_name=${pageName}&is_visible=${newStatus}`);
+            const updateData = await updateResponse.text();
+
+            alert(updateData); // แจ้งเตือนสถานะที่เปลี่ยน
+        }
+    </script>-->
+    <script>
+        async function setSchedule(event) {
+            event.preventDefault();
+
+            const pageName = document.getElementById('page').value;
+            const startTime = document.getElementById('start_time').value;
+            const endTime = document.getElementById('end_time').value;
+
+            // สร้างออบเจ็กต์ XMLHttpRequest
+            const xhr = new XMLHttpRequest();
+
+            // กำหนด method, URL และ asynchronous (true) หรือไม่ (false)
+            xhr.open("POST", "update_page_status.php", true);
+
+            // กำหนด headers สำหรับการส่งข้อมูลเป็น URL encoded
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+            // เมื่อการตอบกลับจากเซิร์ฟเวอร์เสร็จสิ้น
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    console.log(xhr.responseText); // ถ้าสำเร็จจะพิมพ์ข้อความจาก PHP
+                } else {
+                    console.error("There was an error updating the page status.");
+                }
+            };
+
+            // ส่งข้อมูลไปยัง PHP
+            xhr.send("page_name=" + encodeURIComponent(pageName) +
+                "&start_time=" + encodeURIComponent(startTime) +
+                "&end_time=" + encodeURIComponent(endTime));
+            alert("ตั้งเวลาแล้ว");
+        }
+    </script>
+</body>
+
+</html>

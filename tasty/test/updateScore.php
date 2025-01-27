@@ -19,7 +19,7 @@ $score = intval($data['score']);
 $user_id = $_SESSION['user_id'];
 
 // อัพเดตคะแนนในฐานข้อมูล
-require '../dbConfig.php'; // ไฟล์สำหรับเชื่อมต่อฐานข้อมูล
+require '../../dbConfig.php'; // ไฟล์สำหรับเชื่อมต่อฐานข้อมูล
 $stmt = $conn->prepare("UPDATE students SET score = ? WHERE user_id = ?");
 $stmt->bind_param("ii", $score, $user_id);
 

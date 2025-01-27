@@ -1,16 +1,3 @@
-function updateContentVisibility() {
-    // ดึงสถานะจาก Local Storage
-    const content = document.getElementById("container");
-    const isVisible = localStorage.getItem("contentVisibility") === "true";
-    content.style.display = isVisible ? "block" : "none";
-}
-
-// เรียกใช้ฟังก์ชันเมื่อโหลดหน้า
-window.onload = updateContentVisibility;
-
-// ตั้งตัวฟังเพื่อตรวจจับการเปลี่ยนแปลงของ Local Storage
-window.addEventListener("storage", updateContentVisibility);
-
 document.getElementById('checkAnswers').addEventListener('click', function () {
     const correctAnswers = {
         q1: "2",  // มีแรงคืนตัวแปรผันตามการกระจัด
@@ -58,34 +45,3 @@ document.getElementById('checkAnswers').addEventListener('click', function () {
     const data = { score: score };
     xhr.send(JSON.stringify(data));
 });
-
-const countdownDisplay = document.getElementById('countdown');
-
-function formatTime(seconds) {
-    const hours = Math.floor(seconds / 3600);
-    const minutes = Math.floor((seconds % 3600) / 60);
-    const secs = seconds % 60;
-    return `${hours}:${String(minutes).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
-}
-
-function updateCountdown() {
-    const endTime = localStorage.getItem('endTime');
-    if (!endTime) {
-        countdownDisplay.textContent = 'ยังไม่ได้ตั้งเวลา';
-        return;
-    }
-
-    const now = Date.now();
-    const timeLeft = Math.max(0, Math.floor((endTime - now) / 1000)); // เวลาเหลือในวินาที
-
-    if (timeLeft <= 0) {
-        countdownDisplay.textContent = 'หมดเวลา!';
-        clearInterval(intervalId);
-        return;
-    }
-
-    countdownDisplay.textContent = formatTime(timeLeft);
-}
-
-const intervalId = setInterval(updateCountdown, 1000);
-updateCountdown();

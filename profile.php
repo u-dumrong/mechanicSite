@@ -94,7 +94,7 @@ $conn->close();
     <div class="login-container">
         <div class="profile-info">
             <div>
-            <img src="uploads/<?php echo htmlspecialchars($profile_picture); ?>" alt=" " class="profile-icon">
+                <img src="uploads/<?php echo htmlspecialchars($profile_picture); ?>" alt=" " class="profile-icon">
             </div>
             <p><strong>ชื่อผู้ใช้:</strong> <?php echo htmlspecialchars($username); ?></p>
             <p><strong>อีเมล:</strong> <?php echo htmlspecialchars($email); ?></p>
@@ -107,7 +107,11 @@ $conn->close();
             <?php endif; ?>
         </div>
         <div class="button-container">
-            <button onclick="window.location.href='main.php'">กลับไปหน้าหลัก</button>
+            <?php if ($role === 'student'): ?>
+                <button onclick="window.location.href='main.php'">กลับไปหน้าหลัก</button>
+            <?php elseif ($role === 'teacher'): ?>
+                <button onclick="window.location.href='teacherMain.php'">กลับไปหน้าหลัก</button>
+            <?php endif; ?>
             <!-- <button class="red-button" onclick="window.location.href='logout.php'">ลงชื่อออก</button> -->
         </div>
     </div>

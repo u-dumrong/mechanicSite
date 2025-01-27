@@ -18,3 +18,7 @@ CREATE TABLE schedule (
     show_time DATETIME,
     hide_time DATETIME
 );
+
+ALTER TABLE page_status
+ADD start_time DATETIME NOT NULL,
+ADD end_time DATETIME NOT NULL;
